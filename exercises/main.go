@@ -9,7 +9,15 @@ func main() {
 	// four()
 	// five(100)
 	// six(100)
-	seven(1000)
+	// seven(1000)
+	// fmt.Println(eight(78))
+	// nine := func(n int) (int, bool) {
+	// 	return n / 2, n%2 == 0
+	// }
+	// fmt.Println(nine(4))
+	// fmt.Println(ten(3, 5, 2, 1, 5, 199, 2, 5))
+	// fmt.Println((true && false) || (false && true) || !(false && false))
+
 }
 
 func one() {
@@ -81,4 +89,21 @@ func seven(n int) {
 		}
 	}
 	fmt.Println(sum)
+}
+
+// type conversion
+func eight(n int) (float64, bool) {
+	return float64(n) / 2, n%2 == 0
+}
+
+// nine up
+
+func ten(list ...int) int {
+	var biggest int
+	for _, value := range list {
+		if value > biggest {
+			biggest = value
+		}
+	}
+	return biggest
 }

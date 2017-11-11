@@ -24,6 +24,14 @@ func main() {
 	greet := makeGreeter()
 	fmt.Println(greet())
 
+	// callback
+	caller([]int{1, 23, 4, 1, 5}, func(n int) {
+		fmt.Println(n)
+	})
+
+	// deffer
+	deferred()
+
 }
 
 // returns
@@ -67,3 +75,42 @@ func makeGreeter() func() string {
 		return "greetings"
 	}
 }
+
+// callbacks
+func caller(numbers []int, callback func(int)) {
+	for _, value := range numbers {
+		callback(value)
+	}
+}
+
+func filter(numbers []int, callback func(int) bool) []int {
+	var xs []int
+	for _, value := range numbers {
+		// if callback evaluates to true
+		if callback(value) {
+			// add value to the slice
+			xs = append(xs, value)
+		}
+	}
+	return xs
+}
+
+func hello() {
+	fmt.Println("hello")
+}
+
+func world() {
+	fmt.Println("world")
+}
+
+// defer
+func deferred() {
+	// run world right before main exits
+	defer world()
+	hello()
+
+	// open file
+	// defer close
+}
+
+// slices/maps -> reference types
