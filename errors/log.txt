@@ -1,0 +1,2 @@
+2017/11/14 23:03:27 err happend open no-file.txt: Nie można odnaleźć określonego pliku.
+2017/11/14 23:03:27 Fun exception error: 50 N 99 W $v%!(EXTRA *errors.errorString=you can't do that: -10)
