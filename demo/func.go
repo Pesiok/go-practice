@@ -32,6 +32,18 @@ func filterFactory(callback func(float64) bool) func([]float64) []float64 {
 	}
 }
 
+func genericFunc(x interface{}) {
+
+	switch x.(type) {
+	case int:
+		fmt.Println("int")
+	case float64:
+		fmt.Println(x, "float64")
+	default:
+		fmt.Println("unknown")
+	}
+}
+
 func funcs() {
 	data := []float64{43, 2, 34, 35, 65}
 	val, _ := average(data...)
@@ -47,5 +59,5 @@ func funcs() {
 		return val + num
 	})
 
-	fmt.Println(reduced)
+	genericFunc(reduced)
 }

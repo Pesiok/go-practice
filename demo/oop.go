@@ -1,35 +1,52 @@
 package main
 
 import (
+	"encoding/json"
+	"fmt"
 	"net/http"
 )
 
-type animal interface {
-	makeSound() string
-}
-
 type human struct {
+	age    int
 	height int
 	Race   string `json:"race"`
 }
 
-// Person is a type representing someone
-type Person struct {
+type person struct {
 	human
 	FirstName string `json:"firstname"`
 	LastName  string `json:"lastname"`
-	age       int
 }
 
-type people []Person
+func (p *person) live() {
+	p.age++
+}
 
-func (p people) Len() int           { return len(p) }
-func (p people) Swap(i, j int)      { p[i], p[j] = p[j], p[i] }
-func (p people) Less(i, j int) bool { return p[i].height < p[j].height }
+func (p person) MakeSound() string {
+	return "Hello"
+}
 
-http.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
-	// user := Person{}
-	// jsonUser, _ := json.Marshal(user)
-})
+func newPerson(age int, height int, firstName string, lastName string) *person {
+	return &person{
+		human:     human{age, height, "homo sapiens"},
+		FirstName: firstName,
+		LastName:  lastName,
+	}
+}
 
-// http.ListenAndServe(":80", nil)
+func sendPerson(w http.ResponseWriter, req *http.Request) {
+	p := newPerson(34, 134, "Krzysztof", "Krawczyk")
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
+	err := json.NewEncoder(w).Encode(&p)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+}
+
+func oop() {
+	http.HandleFunc("/", sendPerson)
+	http.ListenAndServe(":8080", nil)
+}

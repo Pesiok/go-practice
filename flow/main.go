@@ -78,13 +78,3 @@ type Contact struct {
 	name  string
 	email string
 }
-
-func switchOnType(x interface{}) {
-
-	// assertions
-	switch x.(type) {
-	case int:
-	case string:
-	case Contact:
-	}
-}
